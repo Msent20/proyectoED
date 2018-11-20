@@ -16,7 +16,7 @@ public class PilaEnlazada<E> implements Stack<E> {
 	 * Constructor de la pila
 	 */
 	public PilaEnlazada() {
-		head= new Nodo<E>(null,null);
+		head= null;
 		size=0;
 	}
 	public int size() {

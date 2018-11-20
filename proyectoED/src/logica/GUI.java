@@ -14,6 +14,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
+import org.jdesktop.swingx.plaf.LoginPaneUI;
 import org.jdesktop.xswingx.PromptSupport;
 
 import javax.swing.JEditorPane;
@@ -21,20 +22,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.SystemColor;
 
 public class GUI {
 
 	private JFrame frame;
-	private JTextField txtIngreseRaiz;
-	private JTextField txtAgregarNodo;
-	private JTextField textRuta;
-	private JTextField txtRuta;
 	private logica logi;
-	private JTextField txtPadre;
-	private JTextPane textImprimir;
-	private JButton btnImprimir, AddNodo, btnRuta, btnNiveles, btnListarCarpetas, btnListarArchivos, btnClonar;
-	private JEditorPane editorPane,txtClon,txtListar;
-	private JComboBox comboBox;
+	private JButton CargarArbol;
+	private JButton btnAgregarNodo, btnMostrarRuta, btnListarArchivos,btnListarCarpetas, btnPosorden, btnSimularImpresion, btnPreorden, btnMostrarNiveles;
+	private JTextField textField;
+	private JEditorPane contenedor; 
 
 
 	/**
@@ -74,208 +71,132 @@ public class GUI {
 		frame.getContentPane().add(panelGeneral, BorderLayout.CENTER);
 		panelGeneral.setLayout(null);
 		
-		JPanel panelBotones = new JPanel();
-		panelBotones.setBounds(0, 0, 326, 264);
-		panelGeneral.add(panelBotones);
-		panelBotones.setLayout(new GridLayout(6, 2, 0, 0));
-	
-		
-	
-		
-		JButton CargarArbol = new JButton("Cargar árbol");
+		CargarArbol = new JButton("Cargar árbol");
+		CargarArbol.setBackground(SystemColor.textHighlight);
+		CargarArbol.setBounds(88, 31, 117, 29);
+		panelGeneral.add(CargarArbol);
 		CargarArbol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!txtIngreseRaiz.getText().isEmpty()) {
-					logi.cargar_Arbol(txtIngreseRaiz.getText());
-					btnImprimir.setEnabled(true);
-					AddNodo.setEnabled(true);
-					comboBox.setEnabled(true);
+				String raiz = JOptionPane.showInputDialog(null,"Ingresar raiz");
+				if(!raiz.isEmpty()) {
+					logi.cargar_Arbol(raiz);
+					btnAgregarNodo.setEnabled(true);
 					btnListarArchivos.setEnabled(true);
 					btnListarCarpetas.setEnabled(true);
-					btnNiveles.setEnabled(true);
-					btnRuta.setEnabled(true);
-					txtPadre.setEnabled(true);
-					txtAgregarNodo.setEnabled(true);
-					textRuta.setEnabled(true);
-					btnClonar.setEnabled(true);
-					
-				}
-				else {
-					JOptionPane.showMessageDialog(new JFrame(),"Complete correctamente los campos.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-				}
+					btnMostrarNiveles.setEnabled(true);
+					btnPosorden.setEnabled(true);
+					btnPreorden.setEnabled(true);
+					btnMostrarRuta.setEnabled(true);
+					btnSimularImpresion.setEnabled(true);
+					CargarArbol.setEnabled(false);
+				}else
+					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		panelBotones.add(CargarArbol);
 		
-		txtIngreseRaiz = new JTextField();
-		panelBotones.add(txtIngreseRaiz);
-		txtIngreseRaiz.setText("");
-		txtIngreseRaiz.setColumns(10);
-		PromptSupport.setPrompt("Ingrese raíz", txtIngreseRaiz);
-		PromptSupport.setFontStyle(2, txtIngreseRaiz);
-		PromptSupport.setBackground(Color.WHITE, txtIngreseRaiz);
-		
-		AddNodo = new JButton("Agregar");
-		AddNodo.setEnabled(false);
-		AddNodo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(txtPadre.getText().isEmpty() && txtAgregarNodo.getText().isEmpty())
-					JOptionPane.showMessageDialog(new JFrame(),"Complete correctamente los campos.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-				else 
-					if(!logi.agregar_Nodo(txtPadre.getText(), txtAgregarNodo.getText()))
-						JOptionPane.showMessageDialog(new JFrame(),"Carpeta o archivo ya existente, ingrese otro nombre.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-					
-			}
-		});
-		panelBotones.add(AddNodo);
-		
-		txtPadre = new JTextField();
-		txtPadre.setToolTipText("");
-		txtPadre.setEnabled(false);
-		panelBotones.add(txtPadre);
-		txtPadre.setColumns(10);
-		PromptSupport.setPrompt("Agregar padre", txtPadre);
-		PromptSupport.setFontStyle(2, txtPadre);
-		PromptSupport.setBackground(Color.WHITE, txtPadre);
-		
-		txtAgregarNodo = new JTextField();
-		txtAgregarNodo.setEnabled(false);
-		panelBotones.add(txtAgregarNodo);
-		txtAgregarNodo.setColumns(10);
-		PromptSupport.setPrompt("Agregar nodo", txtAgregarNodo);
-		PromptSupport.setFontStyle(2, txtAgregarNodo);
-		PromptSupport.setBackground(Color.WHITE, txtAgregarNodo);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 264, 326, 264);
-		panelGeneral.add(panel);
-		panel.setLayout(null);
-		
-	
+		btnAgregarNodo = new JButton("Agregar nodo");
+		btnAgregarNodo.setBounds(88, 78, 117, 29);
+		btnAgregarNodo.setEnabled(false);
+		panelGeneral.add(btnAgregarNodo);
 		
 		btnListarArchivos = new JButton("Listar archivos");
-		btnListarArchivos.setEnabled(false);
 		btnListarArchivos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtListar.setText(logi.listar_Archivos());
+				contenedor.setText(logi.listar_Archivos());
 			}
 		});
-		btnListarArchivos.setBounds(190, 51, 120, 30);
-		panel.add(btnListarArchivos);
+		btnListarArchivos.setEnabled(false);
+		btnListarArchivos.setBounds(328, 31, 123, 29);
+		panelGeneral.add(btnListarArchivos);
 		
 		btnListarCarpetas = new JButton("Listar carpetas");
+		btnListarCarpetas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contenedor.setText(logi.listar_Carpetas());
+			}
+		});
 		btnListarCarpetas.setEnabled(false);
-		btnListarCarpetas.setBounds(190, 9, 120, 30);
-		btnListarCarpetas.addActionListener(new ActionListener(){
+		btnListarCarpetas.setBounds(328, 78, 123, 29);
+		panelGeneral.add(btnListarCarpetas);
+		
+		btnMostrarNiveles = new JButton("Mostrar niveles");
+		btnMostrarNiveles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					
-					txtListar.setText(logi.listar_Carpetas());
-				
-			}
-		});
-		panel.add(btnListarCarpetas);
-		
-		btnClonar = new JButton("Clonar árbol");
-		btnClonar.setBounds(46, 9, 120, 30);
-		panel.add(btnClonar);
-		btnClonar.setEnabled(false);
-		
-		txtClon = new JTextPane();
-		txtClon.setEditable(false);
-		txtClon.setBounds(46, 83, 110, 152);
-		panel.add(txtClon);
-		
-		 txtListar = new JTextPane();
-		 txtListar.setEditable(false);
-		txtListar.setBounds(200, 83, 110, 152);
-		panel.add(txtListar);
-		
-			
-			
-			btnNiveles = new JButton("Mostrar niveles");
-			btnNiveles.setBounds(46, 51, 120, 30);
-			panel.add(btnNiveles);
-			btnNiveles.setEnabled(false);
-			btnNiveles.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if(!logi.mostrar_Niveles().isEmpty())
-						txtClon.setText(logi.mostrar_Niveles());
-					else
-						JOptionPane.showMessageDialog(new JFrame(),"Complete correctamente los campos.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-				}
-			});
-		btnClonar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				txtClon.setText(logi.arbolClon());
-			}
-		});
-		
-		btnRuta = new JButton("Mostrar ruta");
-		btnRuta.setEnabled(false);
-		btnRuta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(textRuta.getText().isEmpty())
-					JOptionPane.showMessageDialog(new JFrame(),"Complete correctamente los campos.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+				if(!logi.mostrar_Niveles().isEmpty())
+					contenedor.setText(logi.mostrar_Niveles());
 				else
-					txtRuta.setText(logi.mostrar_Ruta(textRuta.getText()));
+					JOptionPane.showMessageDialog(new JFrame(),"No hay archivos y carpetas para mostrar.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnRuta.setBounds(338, 28, 108, 26);
-		panelGeneral.add(btnRuta);
+		btnMostrarNiveles.setEnabled(false);
+		btnMostrarNiveles.setBounds(463, 31, 152, 29);
+		panelGeneral.add(btnMostrarNiveles);
 		
-		textRuta = new JTextField();
-		textRuta.setEnabled(false);
-		textRuta.setText("");
-		textRuta.setBounds(494, 24, 130, 33);
-		panelGeneral.add(textRuta);
-		textRuta.setColumns(10);
-		PromptSupport.setPrompt("Ingrese archivo", textRuta);
-		PromptSupport.setFontStyle(2, textRuta);
-		PromptSupport.setBackground(Color.WHITE, textRuta);
-		
-		txtRuta = new JTextField();
-		txtRuta.setEditable(false);
-		txtRuta.setBounds(400, 66, 130, 51);
-		panelGeneral.add(txtRuta);
-		txtRuta.setColumns(10);
-		
-		editorPane = new JEditorPane();
-		editorPane.setEditable(false);
-		editorPane.setBounds(454, 143, 170, 41);
-		panelGeneral.add(editorPane);
-		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Posorden", "Preorden"}));
-		comboBox.setEnabled(false);
-		comboBox.addActionListener(new ActionListener() {
+		btnSimularImpresion = new JButton("Simular impresion");
+		btnSimularImpresion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedItem().toString().equals("Posorden"))
-					editorPane.setText(logi.mostrar_PostOrden());
-				else {
-					if(comboBox.getSelectedItem().toString().equals("Preorden"))
-						editorPane.setText(logi.mostrar_Preorden());
-				}
+				contenedor.setText(logi.simular_Impresion());
 			}
 		});
-		comboBox.setToolTipText("");
-		comboBox.setBounds(363, 157, 52, 27);
-		panelGeneral.add(comboBox);
+		btnSimularImpresion.setEnabled(false);
+		btnSimularImpresion.setBounds(463, 78, 152, 29);
+		panelGeneral.add(btnSimularImpresion);
 		
-		btnImprimir = new JButton("Imprimir archivos");
-
-		btnImprimir.setEnabled(false);
-		btnImprimir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {  
-				textImprimir.setText(logi.simular_Impresion());
+		btnPreorden = new JButton("Preorden");
+		btnPreorden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(logi.mostrar_Preorden());
 			}
 		});
-		btnImprimir.setBounds(400, 235, 158, 41);
-		panelGeneral.add(btnImprimir);
+		btnPreorden.setEnabled(false);
+		btnPreorden.setBounds(353, 306, 117, 29);
+		panelGeneral.add(btnPreorden);
 		
-		textImprimir = new JTextPane();
-		textImprimir.setEditable(false);
-		textImprimir.setBounds(375, 311, 218, 155);
-		panelGeneral.add(textImprimir);
+		btnPosorden = new JButton("Posorden");
+		btnPosorden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(logi.mostrar_PostOrden());
+			}
+		});
+		btnPosorden.setEnabled(false);
+		btnPosorden.setBounds(482, 306, 117, 29);
+		panelGeneral.add(btnPosorden);
+		
+		btnMostrarRuta = new JButton("Mostrar ruta");
+		btnMostrarRuta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ruta= JOptionPane.showInputDialog(null,"Ingrese el archivo:");
+				if(!ruta.isEmpty())
+					textField.setText(logi.mostrar_Ruta(ruta));
+				else
+					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		btnMostrarRuta.setEnabled(false);
+		btnMostrarRuta.setBounds(419, 347, 117, 29);
+		panelGeneral.add(btnMostrarRuta);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(347, 401, 252, 26);
+		panelGeneral.add(textField);
+		textField.setColumns(10);
+		
+		contenedor= new JEditorPane();
+		contenedor.setEditable(false);
+		contenedor.setBounds(328, 129, 287, 138);
+		panelGeneral.add(contenedor);
+		btnAgregarNodo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String padre = JOptionPane.showInputDialog(null,"Ingrese carpeta contenedora.");
+				String hijo= JOptionPane.showInputDialog(null,"Ingrese nombre del archivo");
+				if(padre.isEmpty() && hijo.isEmpty()) 
+					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+				else if (!logi.agregar_Nodo(padre, hijo))
+					JOptionPane.showMessageDialog(new JFrame(),"Archivo o carpeta ya existente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		
 		
 	}
 }
