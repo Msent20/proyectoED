@@ -272,12 +272,5 @@ public class logica {
 			
 		} catch (InvalidPositionException e) {}
 	}
-	public String arbolClon() {
-		Arbol<String> arbol= clonar_Arbol();
-		String toRet = "";
-		for (Position<String> p : arbol.positions())
-			toRet += p.element() + "\n";
-		
-		return toRet;
-	}
+
 }

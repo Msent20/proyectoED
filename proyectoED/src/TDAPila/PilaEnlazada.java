@@ -13,7 +13,7 @@ public class PilaEnlazada<E> implements Stack<E> {
 	protected Nodo<E> head;
 	
 	/**
-	 * Constructor de la pila
+	 * Crea una pila vacia
 	 */
 	public PilaEnlazada() {
 		head= null;

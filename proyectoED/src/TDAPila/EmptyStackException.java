@@ -2,7 +2,7 @@ package TDAPila;
 
 
 /**
- * Implementacion de la excepcion de pila vaca
+ * Implementacion de la excepcion de pila vacia
  * 
  * @author Giovanni Lorenzo
  *
@@ -11,7 +11,7 @@ package TDAPila;
 public class EmptyStackException extends Exception{
 	
 	/**
-	 * Constructor de la excepcion
+	 * Crea la excepcion de una pila vacia
 	 * @param s Mensaje a exhibir 
 	 */
 	public EmptyStackException(String s) {

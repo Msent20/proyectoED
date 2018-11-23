@@ -1,8 +1,8 @@
 package TDAArbol;
 
 import java.util.Iterator;
-
 import TDALista.*;
+import TDAPila.*;
 
 /**
  * Implementacion de arbol con nodos con rotulo generico
@@ -147,114 +147,114 @@ public class Arbol<E> implements Tree<E> {
 		size--;
 	}
 	public void removeInternalNode(Position<E> p) throws InvalidPositionException {
+		
+		try {
 			
-			try {
-				
-				if (this.isEmpty())
-					throw new InvalidPositionException("Arbol vacio");			
-				
-				TNodo<E> nodAEliminar = checkPosition(p);
-				
-				if (!isInternal(p))
-					throw new InvalidPositionException("El nodo P es externo");
-				
-				if (nodAEliminar == root) {
-					
-					if (nodAEliminar.getHijos().size() == 1) {
-						root = nodAEliminar.getHijos().first().element();
-						size--;
-					} 
-					else {
-							throw new InvalidPositionException("El nodo raiz tiene mas de un hijo");
-					}				
-				 } 
-				else {						
-					
-					TNodo<E> nuevoPadre =  nodAEliminar.getPadre();
-					PositionList<TNodo<E>> hijosNAE = nodAEliminar.getHijos();
-					
-					PositionList<TNodo<E>> padreNAE = nuevoPadre.getHijos();
-					Position<TNodo<E>> primero = padreNAE.first();
+			if (this.isEmpty())
+				throw new InvalidPositionException("Arbol vacio");			
 			
-					while( primero.element() != nodAEliminar) {
-						primero = padreNAE.next(primero);
-					}
+			TNodo<E> nodAEliminar = checkPosition(p);
+			
+			if (!isInternal(p))
+				throw new InvalidPositionException("El nodo P es externo");
+			
+			if (nodAEliminar == root) {
 				
-					if (!padreNAE.isEmpty()) {
-						
-						while (!hijosNAE.isEmpty()) {
-							Position<TNodo<E>> hijAInsert = hijosNAE.first();
-							padreNAE.addBefore(primero, hijAInsert.element());
-							
-							TNodo<E> insertado = padreNAE.prev(primero).element();
-							insertado.setPadre(nuevoPadre);
-							hijosNAE.remove(hijAInsert);
-						}
-					}
-					padreNAE.remove(primero);
+				if (nodAEliminar.getHijos().size() == 1) {
+					root = nodAEliminar.getHijos().first().element();
 					size--;
-				}
+				} 
+				else {
+						throw new InvalidPositionException("El nodo raiz tiene mas de un hijo");
+				}				
+			 } 
+			else {						
 				
-			} catch (TDALista.BoundaryViolationException e){
-				e.printStackTrace();
-			} catch (TDALista.EmptyListException e) {
-				e.printStackTrace();
-			} catch (TDALista.InvalidPositionException e) {
-				e.printStackTrace();
-			}
-		}
-
-
-	public void removeNode(Position<E> p) throws InvalidPositionException {
-		TNodo<E> n= checkPosition(p);
-		try{
-		if(n==root) {
-			if(n.getHijos().isEmpty())
-				root=null;
-			if(n.getHijos().size()==1) {
-				root=root.getHijos().first().element();
-				root.setPadre(null);
-			}
-			if(n.getHijos().size()>1){
-				throw new InvalidPositionException("La raiz tiene muchos hijos.");
-			}
-		}
-		else{
-			TNodo<E> nuevoPadre =  n.getPadre();
-			PositionList<TNodo<E>> hijosNAE = n.getHijos();
+				TNodo<E> nuevoPadre =  nodAEliminar.getPadre();
+				PositionList<TNodo<E>> hijosNAE = nodAEliminar.getHijos();
+				
+				PositionList<TNodo<E>> padreNAE = nuevoPadre.getHijos();
+				Position<TNodo<E>> primero = padreNAE.first();
+		
+				while( primero.element() != nodAEliminar) {
+					primero = padreNAE.next(primero);
+				}
 			
-			PositionList<TNodo<E>> padreNAE = nuevoPadre.getHijos();
-			Position<TNodo<E>> primero = padreNAE.first();
-	
-			while( primero.element() != n) {
-				primero = padreNAE.next(primero);
-			}
-		
-			if (!padreNAE.isEmpty()) {
-				
-				while (!hijosNAE.isEmpty()) {
-					Position<TNodo<E>> hijAInsert = hijosNAE.first();
-					padreNAE.addBefore(primero, hijAInsert.element());
+				if (!padreNAE.isEmpty()) {
 					
-					TNodo<E> insertado = padreNAE.prev(primero).element();
-					insertado.setPadre(nuevoPadre);
-					hijosNAE.remove(hijAInsert);
-				
+					while (!hijosNAE.isEmpty()) {
+						Position<TNodo<E>> hijAInsert = hijosNAE.first();
+						padreNAE.addBefore(primero, hijAInsert.element());
+						
+						TNodo<E> insertado = padreNAE.prev(primero).element();
+						insertado.setPadre(nuevoPadre);
+						hijosNAE.remove(hijAInsert);
+					}
 				}
-			padreNAE.remove(primero);
+				padreNAE.remove(primero);
+				size--;
 			}
-		}if(n.getHijos().size()!=0){
-			PositionList<TNodo<E>> listahijos = n.getPadre().getHijos();
-			Position<TNodo<E>> pos=listahijos.first();
-			while(pos.element()!=n)
-				pos=listahijos.next(pos);
-			listahijos.remove(pos);
-			pos.element().setPadre(null);
+			
+		} catch (TDALista.BoundaryViolationException e){
+			e.printStackTrace();
+		} catch (TDALista.EmptyListException e) {
+			e.printStackTrace();
+		} catch (TDALista.InvalidPositionException e) {
+			e.printStackTrace();
 		}
-		
-		}catch(TDALista.InvalidPositionException|TDALista.BoundaryViolationException|EmptyListException m) { m.printStackTrace();}
-		size--;
 	}
+
+
+public void removeNode(Position<E> p) throws InvalidPositionException {
+	TNodo<E> n= checkPosition(p);
+	try{
+	if(n==root) {
+		if(n.getHijos().isEmpty())
+			root=null;
+		if(n.getHijos().size()==1) {
+			root=root.getHijos().first().element();
+			root.setPadre(null);
+		}
+		if(n.getHijos().size()>1){
+			throw new InvalidPositionException("La raiz tiene muchos hijos.");
+		}
+	}
+	else{
+		TNodo<E> nuevoPadre =  n.getPadre();
+		PositionList<TNodo<E>> hijosNAE = n.getHijos();
+		
+		PositionList<TNodo<E>> padreNAE = nuevoPadre.getHijos();
+		Position<TNodo<E>> primero = padreNAE.first();
+
+		while( primero.element() != n) {
+			primero = padreNAE.next(primero);
+		}
+	
+		if (!padreNAE.isEmpty()) {
+			
+			while (!hijosNAE.isEmpty()) {
+				Position<TNodo<E>> hijAInsert = hijosNAE.first();
+				padreNAE.addBefore(primero, hijAInsert.element());
+				
+				TNodo<E> insertado = padreNAE.prev(primero).element();
+				insertado.setPadre(nuevoPadre);
+				hijosNAE.remove(hijAInsert);
+			
+			}
+		padreNAE.remove(primero);
+		}
+	}if(n.getHijos().size()!=0){
+		PositionList<TNodo<E>> hijosPadre = n.getPadre().getHijos();
+		Position<TNodo<E>> pos=hijosPadre.first();
+		while(pos.element()!=n)
+			pos=hijosPadre.next(pos);
+		hijosPadre.remove(pos);
+		pos.element().setPadre(null);
+	}
+	
+	}catch(TDALista.InvalidPositionException|TDALista.BoundaryViolationException|EmptyListException m) { m.printStackTrace();}
+	size--;
+}
 	private TNodo<E> checkPosition(Position<E> v) throws InvalidPositionException{
 		if(size==0)
 			throw new InvalidPositionException("Arbol vacio");
