@@ -75,12 +75,29 @@ public class logica {
 	 */
 	public String mostrar_Preorden() {
 		String lista = "[ ";
-		for (Position<String> p : a.positions() )
-			lista += p.element() + ", ";
+		
+		try {
+			lista = preOrden(a.root() , lista);
+			
+		} catch (EmptyTreeException e) {}
+		
 		lista += " ]";
 		return lista;
 	}
 	
+	private String preOrden(Position<String> posicion , String lista) {
+		
+		lista += posicion.element() + " , ";
+		try {
+			for (Position<String> pos : a.children(posicion)) {
+				lista=postOrden( pos , lista);
+			}
+			
+		} catch (InvalidPositionException e) {}
+		
+		return lista;
+		
+	}
 	
 	/**
 	 * Muestra el arbol en postorden
@@ -114,7 +131,7 @@ public class logica {
 	 */
 	
 	public String listar_Archivos() {
-		String lista = " ";
+		String lista = "";
 		if (a.size() > 1) {
 			for (Position<String> p : a.positions() )
 				try {
@@ -131,13 +148,18 @@ public class logica {
 	 * @return cadena de carpetas
 	 */
 	public String listar_Carpetas(){
-		String lista = " ";
-		for (Position<String> p : a.positions()) {
-			try {
-				if (a.isInternal(p))
-					lista += p.element() + "\n";
-			} catch (InvalidPositionException e) {}
+		String lista = "";
+		try {
+			
+			if (a.size() == 1)
+				lista += a.root().element() + "\n";
+			else 
+				for (Position<String> p : a.positions()) {
+				
+					if (a.isInternal(p))
+						lista += p.element() + "\n";
 		}
+			} catch (InvalidPositionException | EmptyTreeException e) {}
 		lista += " ";
 		return lista;
 	}
@@ -215,8 +237,7 @@ public class logica {
 	 */
 	public String simular_Impresion() {
 		String toRet = "";
-		ColaConHeap<Integer,String> colacc = new ColaConHeap<Integer,String>(new Comparador<Integer>());
-		PilaEnlazada<String> pila = new PilaEnlazada<String>(); 
+		ColaConHeap<Integer,String> colacc = new ColaConHeap<Integer,String>(new Comparador<Integer>()); 
 		
 		try {
 				if(a.size()>1) {
@@ -236,13 +257,11 @@ public class logica {
 					}
 				}
 				}
-				while (!colacc.isEmpty())
-					pila.push(colacc.removeMin().getValue());
+				while (!colacc.isEmpty()) {
+					toRet =  colacc.removeMin().getValue()+"\n" + toRet;
+					}
 				
-				while (!pila.isEmpty())
-					toRet += pila.pop() + "\n";
-				
-		} catch ( EmptyPriorityQueueException | InvalidKeyException | InvalidPositionException | BoundaryViolationException | EmptyStackException e) {}
+		} catch ( EmptyPriorityQueueException | InvalidKeyException | InvalidPositionException | BoundaryViolationException e) {}
 			
 		return toRet;
 		

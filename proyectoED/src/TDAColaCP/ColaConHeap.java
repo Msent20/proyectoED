@@ -32,29 +32,11 @@ package TDAColaCP;
 			public String toString() {
 				return"("+clave+","+valor+")";
 			}
-			
-			/**
-			 * Establece la clave de la entrada
-			 * @param k clave a establecer
-			 */
-			
-			public void setKey(K k) {
-				this.clave = k;
-			}
-			
-			/**
-			 * Establece el valor de la entrada
-			 * @param v valor a establecer
-			 */
-			
-			public void setValue(V v) {
-				this.valor = v;
-			}
 		}
 		
 		
 		/**
-		 * Constructor de la colaCP
+		 * Crea una colaCP con Heap
 		 * @param comp comparador a utilizar
 		 */
 		

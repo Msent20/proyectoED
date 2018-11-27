@@ -8,7 +8,7 @@ package TDAArbol;
 public class EmptyTreeException extends Exception {
 
 	/**
-	 * Constructor de la excepción
+	 * Crea una excepcion de árbol vacío
 	 * @param msg mensaje de la excepción
 	 */
 	public EmptyTreeException(String msg) {

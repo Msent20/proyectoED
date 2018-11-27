@@ -14,7 +14,7 @@ public class ArrayQueue<E> implements Queue<E>{
 	private E[] array;
  	
 	/**
-	 * Constructor de la cola
+	 * Crea una cola con arreglo circular
 	 */
 	
 	public ArrayQueue() {

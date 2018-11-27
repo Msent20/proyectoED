@@ -7,7 +7,7 @@ package TDAArbol;
 
 public class InvalidPositionException extends Exception {
 	/**
-	 * Constructor de la excepción
+	 * Crea una excepcion de posicion invalida
 	 * @param msg mensaje de la excepción
 	 */
 	public InvalidPositionException(String msg) {

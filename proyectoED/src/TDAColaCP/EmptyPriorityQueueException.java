@@ -10,7 +10,7 @@ package TDAColaCP;
 public class EmptyPriorityQueueException extends Exception{
 	
 	/**
-	 * Constructor de la excepcion
+	 * Crea una excepcion de colaCP vacia
 	 * @param m Mensaje a exhibir
 	 */
 	public EmptyPriorityQueueException(String m) {

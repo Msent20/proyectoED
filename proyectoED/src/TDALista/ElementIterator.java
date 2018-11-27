@@ -2,6 +2,8 @@
 package TDALista;
 import java.util.Iterator;
 import TDAArbol.Position;
+import TDAArbol.InvalidPositionException;
+import TDAArbol.BoundaryViolationException;
 
 /**
  * Implementacion de iterador de una lista

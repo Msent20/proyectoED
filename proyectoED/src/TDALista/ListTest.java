@@ -6,6 +6,8 @@ import java.util.*;
 import java.util.Iterator;
 import TDAArbol.Position;
 import org.junit.*;
+import TDAArbol.InvalidPositionException;
+import TDAArbol.BoundaryViolationException;
 
 public class ListTest {
 	private PositionList<String> l; // interface

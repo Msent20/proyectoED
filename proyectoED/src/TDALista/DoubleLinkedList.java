@@ -2,6 +2,8 @@ package TDALista;
 
 import java.util.Iterator;
 import TDAArbol.Position;
+import TDAArbol.InvalidPositionException;
+import TDAArbol.BoundaryViolationException;
 
 /**
  * Implementacion de una Lista doblemente enlazada con centinelas
@@ -15,7 +17,7 @@ public class DoubleLinkedList<E> implements PositionList<E>{
 	protected NodoE<E> head, tail;
 	
 	/**
-	 *	Constructor de la lista
+	 *	Crea una lista doblemente enlazada con centinelas
 	 */
 	
 	public DoubleLinkedList() {

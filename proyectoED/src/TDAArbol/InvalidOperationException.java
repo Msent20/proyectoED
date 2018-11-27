@@ -7,7 +7,7 @@ package TDAArbol;
  */
 public class InvalidOperationException extends Exception {
 	/**
-	 * Constructor de la excepción
+	 * Crea una excepcion de raiz ya creada
 	 * @param msg mensaje de la excepción
 	 */
 	public InvalidOperationException(String msg) {

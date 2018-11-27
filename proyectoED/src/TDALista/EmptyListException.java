@@ -9,7 +9,7 @@ package TDALista;
 	public class EmptyListException extends Exception{
 		
 		/**
-		 * Constructor de la excepcion
+		 * Crea una excepcion de lista vacia
 		 * @param msg Mensaje a exhibir
 		 */
 		

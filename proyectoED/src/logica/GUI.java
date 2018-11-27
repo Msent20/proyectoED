@@ -1,3 +1,4 @@
+
 package logica;
 
 import java.awt.EventQueue;
@@ -34,6 +35,7 @@ import java.awt.SystemColor;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.JScrollPane;
 
 public class GUI {
 
@@ -85,17 +87,21 @@ public class GUI {
 		frame.getContentPane().add(panelGeneral, BorderLayout.CENTER);
 		panelGeneral.setLayout(null);
 		
+		/**
+		 * Crea el boton cargar arbol, que pide al usuario que ingrese una carpeta contenedora
+		 */
 		CargarArbol = new JButton("Cargar árbol");
 		CargarArbol.setBackground(SystemColor.textHighlight);
 		CargarArbol.setBounds(36, 31, 105, 29);
 		panelGeneral.add(CargarArbol);
 		CargarArbol.addActionListener(new ActionListener() {
-			/* (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-			 */
+		
 			public void actionPerformed(ActionEvent e) {
 				String raiz = JOptionPane.showInputDialog(null,"Ingresar raiz");
-				if(!raiz.isEmpty()) {
+				
+				if(raiz==null) {
+					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+				}else if(!raiz.isEmpty()) {
 					logi.cargar_Arbol(raiz);
 					btnAgregarNodo.setEnabled(true);
 					btnListarArchivos.setEnabled(true);
@@ -110,15 +116,51 @@ public class GUI {
 					DefaultMutableTreeNode root = new DefaultMutableTreeNode(raiz);
 					modelo.setRoot(root);
 					nodos.addFirst(root);
-				}else
+				}else 
 					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 		});
+		
+		/**
+		 * Crea el boton Agregar nodo, que le pide al usuario una carpeta contenedora y 
+		 * el nombre del archivo a crear
+		 */
 		
 		btnAgregarNodo = new JButton("Agregar nodo");
 		btnAgregarNodo.setBounds(36, 71, 105, 29);
 		btnAgregarNodo.setEnabled(false);
 		panelGeneral.add(btnAgregarNodo);
+		btnAgregarNodo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String padre = JOptionPane.showInputDialog(null,"Ingrese carpeta contenedora.");
+				String hijo= JOptionPane.showInputDialog(null,"Ingrese nombre del archivo");
+				
+				if(padre==null ||hijo==null)
+					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+				else{
+					if(padre.isEmpty() || hijo.isEmpty()) 
+						JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+					else if (!logi.agregar_Nodo(padre, hijo))
+						JOptionPane.showMessageDialog(new JFrame(),"Archivo o carpeta ya existente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
+					else {
+						
+						DefaultMutableTreeNode padreD = buscarNodo(padre);
+						DefaultMutableTreeNode hijoD = new DefaultMutableTreeNode(hijo);
+						modelo.insertNodeInto(hijoD, padreD, padreD.getChildCount());
+						modelo.reload();
+						expandir();
+						nodos.addLast(hijoD);
+					}
+				}
+				
+			}
+		});
+		
+		/**
+		 * Crea el boton Listar archivos, que al utilizarlo se mostrara todos los archivos
+		 * del sistema.
+		 */
 		
 		btnListarArchivos = new JButton("Listar archivos");
 		btnListarArchivos.addActionListener(new ActionListener() {
@@ -130,6 +172,11 @@ public class GUI {
 		btnListarArchivos.setBounds(328, 31, 123, 29);
 		panelGeneral.add(btnListarArchivos);
 		
+		
+		/**
+		 * Crea el boton listar carpetas, que al ser precionado te lista las carpetas cargadas
+		 * del sistema. 
+		 */
 		btnListarCarpetas = new JButton("Listar carpetas");
 		btnListarCarpetas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,6 +187,11 @@ public class GUI {
 		btnListarCarpetas.setBounds(328, 78, 123, 29);
 		panelGeneral.add(btnListarCarpetas);
 		
+		
+		/**
+		 * Crea el boton mostrar niveles, al precionarlos te muestra las carpetas y archivos por niveles
+		 * 
+		 */
 		btnMostrarNiveles = new JButton("Mostrar niveles");
 		btnMostrarNiveles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,6 +205,11 @@ public class GUI {
 		btnMostrarNiveles.setBounds(463, 31, 152, 29);
 		panelGeneral.add(btnMostrarNiveles);
 		
+		
+		/**
+		 * Crea el boton Simular impresion, que al ser presionado simula una impresion de
+		 * los archivos del sistema.
+		 */
 		btnSimularImpresion = new JButton("Simular impresion");
 		btnSimularImpresion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -163,6 +220,10 @@ public class GUI {
 		btnSimularImpresion.setBounds(463, 78, 152, 29);
 		panelGeneral.add(btnSimularImpresion);
 		
+		/**
+		 * Crea el boton Preorden que al utilizarlo se visualizan todos los archivos y carpetas
+		 * del sitema en preorden
+		 */
 		btnPreorden = new JButton("Preorden");
 		btnPreorden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -173,6 +234,11 @@ public class GUI {
 		btnPreorden.setBounds(353, 306, 117, 29);
 		panelGeneral.add(btnPreorden);
 		
+		
+		/**
+		 * Crea el boton Preorden que al utilizarlo se visualizan todos los archivos y carpetas
+		 * del sitema en Posorden.
+		 */
 		btnPosorden = new JButton("Posorden");
 		btnPosorden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,6 +249,11 @@ public class GUI {
 		btnPosorden.setBounds(482, 306, 117, 29);
 		panelGeneral.add(btnPosorden);
 		
+		
+		/**
+		 * Crea el boton mostrar Ruta, que al presionarlo se visualiza la ruta
+		 * del archivo que desee el usuario
+		 */
 		btnMostrarRuta = new JButton("Mostrar ruta");
 		btnMostrarRuta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -213,17 +284,19 @@ public class GUI {
 		nodos = new DoubleLinkedList<DefaultMutableTreeNode>();
 		modelo = new DefaultTreeModel(null);
 		tree.setModel(modelo);
-		tree.setBounds(38, 129, 105, 247);
+		tree.setBounds(38, 129, 117, 247);
 		panelGeneral.add(tree);
 		
 		treeClon = new JTree();
 		
 		treeClon.setModel(null);
-		treeClon.setBounds(153, 129, 130, 247);
+		treeClon.setBounds(166, 129, 117, 247);
 		panelGeneral.add(treeClon);
 		
-		
-		btnClonarbol = new JButton("Clonar �rbol");
+		/**
+		 * Crea el boton Clonar Arbol, que al utilizarlo te clona el sistema que tengas hasta el momento
+		 */
+		btnClonarbol = new JButton("Clonar arbol");
 		btnClonarbol.setBounds(151, 74, 117, 23);
 		btnClonarbol.setEnabled(false);
 		panelGeneral.add(btnClonarbol);
@@ -244,25 +317,6 @@ public class GUI {
 			}		
 		});
 		
-		btnAgregarNodo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String padre = JOptionPane.showInputDialog(null,"Ingrese carpeta contenedora.");
-				String hijo= JOptionPane.showInputDialog(null,"Ingrese nombre del archivo");
-				if(padre.isEmpty() || hijo.isEmpty()) 
-					JOptionPane.showMessageDialog(new JFrame(),"Complete el campo correctamente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-				else if (!logi.agregar_Nodo(padre, hijo))
-					JOptionPane.showMessageDialog(new JFrame(),"Archivo o carpeta ya existente.", "Dialog", JOptionPane.INFORMATION_MESSAGE);
-				else {
-					
-					DefaultMutableTreeNode padreD = buscarNodo(padre);
-					DefaultMutableTreeNode hijoD = new DefaultMutableTreeNode(hijo);
-					modelo.insertNodeInto(hijoD, padreD, padreD.getChildCount());
-					modelo.reload();
-					expandir();
-					nodos.addLast(hijoD);
-				}
-			}
-		});
 	
 		
 		
@@ -310,6 +364,4 @@ public class GUI {
 	
 		return toRet;
 	}
-	
-	
 }

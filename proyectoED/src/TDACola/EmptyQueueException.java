@@ -9,7 +9,7 @@ package TDACola;
 public class EmptyQueueException extends Exception {
 	
 	/**
-	 * Constructor de la excepción
+	 * Crea la excepción de cola vacia
 	 * @param s Mensaje a exhibir
 	 */
 	public EmptyQueueException(String s) { 

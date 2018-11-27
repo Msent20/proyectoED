@@ -13,7 +13,7 @@ public class Nodo<E> {
 	private Nodo<E> siguiente;
 	
 	/**
-	 * Crea un para pila simplemente enlazada
+	 * Crea un nodo simplemente enlazado de pila
 	 * @param e Rotulo del nodo
 	 * @param sig Nodo siguiente
 	 */

@@ -14,7 +14,7 @@ public class TNodo<E> implements Position<E>{
 	private E element;
 	
 	/**
-	 * Constructor del nodo
+	 * Crea un nodo para árbol general con referencia a sus hijos, padre y rotulo nulos
 	 */
 	
 	public TNodo(){
@@ -24,7 +24,7 @@ public class TNodo<E> implements Position<E>{
 	}
 	
 	/**
-	 * Constructor del nodo y seteo de rotulo
+	 * Crea un nodo para árbol general con referencia a sus hijos, con padre nulo y rotulo no nulo
 	 * @param elemento rotulo a establecer
 	 */
 	
@@ -35,7 +35,7 @@ public class TNodo<E> implements Position<E>{
 	}
 	
 	/**
-	 * Constructor del nodo con seteo de roulo y nodo padre
+	 * Crea un nodo para árbol general con referencia a sus hijos, con padre y rotulo no nulos
 	 * @param elemento rotulo a establecer
 	 * @param p padre a establecer
 	 */

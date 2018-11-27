@@ -16,7 +16,7 @@ public class Arbol<E> implements Tree<E> {
 	protected int size;
 	
 	/**
-	 * Constructor de la estructura
+	 * Crea un arbol general con raiz nula
 	 */
 	
 	public Arbol() {
@@ -111,7 +111,7 @@ public class Arbol<E> implements Tree<E> {
 			while(pos.element()!=hermano) 
 				pos=padre.getHijos().next( pos);
 			padre.getHijos().addBefore( pos, nuevo);
-		}catch(TDALista.InvalidPositionException| EmptyListException | TDALista.BoundaryViolationException m) {}
+		}catch(InvalidPositionException| EmptyListException | BoundaryViolationException m) {}
 		size++;
 		return nuevo;
 	}
@@ -126,7 +126,7 @@ public class Arbol<E> implements Tree<E> {
 			while(pos.element()!=hermano) 
 				pos= padre.getHijos().next(pos);
 			padre.getHijos().addAfter(pos, nuevo);
-		}catch(TDALista.InvalidPositionException| EmptyListException | TDALista.BoundaryViolationException m) {}
+		}catch(InvalidPositionException| EmptyListException | BoundaryViolationException m) {}
 		size++;
 		return nuevo;
 	}
@@ -143,20 +143,16 @@ public class Arbol<E> implements Tree<E> {
 				pos=n.getPadre().getHijos().next(pos);
 			n.getPadre().getHijos().remove(pos);
 			}
-		}catch(EmptyListException| TDALista.BoundaryViolationException | TDALista.InvalidPositionException e) {}
+		}catch(EmptyListException| BoundaryViolationException | InvalidPositionException e) {}
 		size--;
 	}
 	public void removeInternalNode(Position<E> p) throws InvalidPositionException {
-		
-		try {
-			
-			if (this.isEmpty())
-				throw new InvalidPositionException("Arbol vacio");			
-			
-			TNodo<E> nodAEliminar = checkPosition(p);
-			
-			if (!isInternal(p))
-				throw new InvalidPositionException("El nodo P es externo");
+		TNodo<E> nodAEliminar = checkPosition(p);
+		if (nodAEliminar.getHijos().size()==0)
+			throw new InvalidPositionException("El nodo P es externo");
+		if(nodAEliminar==root && nodAEliminar.getHijos().size()>1)
+			throw new InvalidPositionException("Error: la raiz tiene mas de un hijo");
+		try {		
 			
 			if (nodAEliminar == root) {
 				
@@ -164,9 +160,6 @@ public class Arbol<E> implements Tree<E> {
 					root = nodAEliminar.getHijos().first().element();
 					size--;
 				} 
-				else {
-						throw new InvalidPositionException("El nodo raiz tiene mas de un hijo");
-				}				
 			 } 
 			else {						
 				
@@ -195,11 +188,11 @@ public class Arbol<E> implements Tree<E> {
 				size--;
 			}
 			
-		} catch (TDALista.BoundaryViolationException e){
+		} catch (BoundaryViolationException e){
 			e.printStackTrace();
-		} catch (TDALista.EmptyListException e) {
+		} catch (EmptyListException e) {
 			e.printStackTrace();
-		} catch (TDALista.InvalidPositionException e) {
+		} catch (InvalidPositionException e) {
 			e.printStackTrace();
 		}
 	}
@@ -207,17 +200,17 @@ public class Arbol<E> implements Tree<E> {
 
 public void removeNode(Position<E> p) throws InvalidPositionException {
 	TNodo<E> n= checkPosition(p);
+	if(n==root && n.getHijos().size()>1)
+		throw new InvalidPositionException("La raiz tiene mas de un hijo");
 	try{
 	if(n==root) {
 		if(n.getHijos().isEmpty())
 			root=null;
-		if(n.getHijos().size()==1) {
-			root=root.getHijos().first().element();
-			root.setPadre(null);
-		}
-		if(n.getHijos().size()>1){
-			throw new InvalidPositionException("La raiz tiene muchos hijos.");
-		}
+		else 
+			if(n.getHijos().size()==1) {
+				root=root.getHijos().first().element();
+				root.setPadre(null);
+			}
 	}
 	else{
 		TNodo<E> nuevoPadre =  n.getPadre();
@@ -252,7 +245,7 @@ public void removeNode(Position<E> p) throws InvalidPositionException {
 		pos.element().setPadre(null);
 	}
 	
-	}catch(TDALista.InvalidPositionException|TDALista.BoundaryViolationException|EmptyListException m) { m.printStackTrace();}
+	}catch(InvalidPositionException|BoundaryViolationException|EmptyListException m) { m.printStackTrace();}
 	size--;
 }
 	private TNodo<E> checkPosition(Position<E> v) throws InvalidPositionException{

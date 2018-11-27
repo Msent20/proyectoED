@@ -1,14 +1,14 @@
 package TDAArbol;
 
 /**
- * Retorna el caso de una posición pasada por parámetro es la raíz
+ * Retorna el caso de sobrepasar los limites de la estructura
  * @author Giovanni Lorenzo
  *
  */
 
 public class BoundaryViolationException extends Exception {
 	/**
-	 * Constructor de la excepción
+	 * Crea una excepcion de sobrepasar lo limites de la estructura
 	 * @param msg mensaje de la excepción
 	 */
 	public BoundaryViolationException(String msg) {

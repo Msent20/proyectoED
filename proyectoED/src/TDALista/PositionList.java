@@ -3,6 +3,8 @@ import java.lang.Iterable;
 
 import java.util.Iterator;
 import TDAArbol.Position;
+import TDAArbol.InvalidPositionException;
+import TDAArbol.BoundaryViolationException;
 
 /**
  * Interface PositionList

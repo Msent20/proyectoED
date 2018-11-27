@@ -11,7 +11,7 @@ package TDAColaCP;
 public class InvalidKeyException extends RuntimeException {
 	
 	/** 
-	 * Constructor de la excepcion
+	 * Crea una excepcion de clave invalida
 	 * @param err Mensaje a exhibir
 	 */
 	public InvalidKeyException (String err){

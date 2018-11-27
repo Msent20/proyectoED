@@ -13,7 +13,7 @@ public class NodoE<E> implements Position<E>{
 	private NodoE<E> siguiente,anterior;
 	
 	/**
-	 * Constructor del nodo
+	 * Crea un nodo doblemente enlazado con rotulo nulo
 	 */
 	
 	public NodoE(){

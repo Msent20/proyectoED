@@ -7,6 +7,7 @@ package TDAColaCP;
  */
 
 public class Comparador<E> implements java.util.Comparator<E> {
+
 	
 	public int compare(E o1, E o2) {
 		

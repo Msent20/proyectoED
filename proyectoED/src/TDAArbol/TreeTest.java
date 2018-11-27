@@ -32,74 +32,74 @@ public class TreeTest {
 	public void size() {
 		Position<Integer> h1, h2, h3, h4;
 		h1 = h2 = h3 = h4 = null;
-		// Caso_de_prueba: Arbol Vac�o.
-		assertTrue("Tama�o del �rbol justo despu�s de ser creado != 0",
+		// Caso_de_prueba: Arbol Vacío.
+		assertTrue("Tamaño del árbol justo después de ser creado != 0",
 				T.size() == 0);
-		// Caso_de_prueba: Solo ra�z.
+		// Caso_de_prueba: Solo raíz.
 		try {
 			T.createRoot(1);
-			assertTrue("Tama�o del �rbol con 1 elemento != 1", T.size() == 1);
+			assertTrue("Tamaño del árbol con 1 elemento != 1", T.size() == 1);
 		} catch (InvalidOperationException e) {
-			fail("Al crear la ra�z de un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al crear la raíz de un árbol vacío lanza la excepción InvalidOperationException");
 		}
 		try {
 			h1 = T.addFirstChild(T.root(), 2);
-			assertTrue("Tama�o del �rbol con 2 elementos != 2", T.size() == 2);
+			assertTrue("Tamaño del árbol con 2 elementos != 2", T.size() == 2);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(root,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(root,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			h4 = T.addLastChild(T.root(), 5);
-			assertTrue("Tama�o del �rbol con 3 elementos != 3", T.size() == 3);
+			assertTrue("Tamaño del árbol con 3 elementos != 3", T.size() == 3);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addLastChild(root,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addLastChild(root,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			h2 = T.addAfter(T.root(), h1, 3);
-			assertTrue("Tama�o del �rbol con 4 elementos != 4", T.size() == 4);
+			assertTrue("Tamaño del árbol con 4 elementos != 4", T.size() == 4);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addAfter(root,primerHijo,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addAfter(root,primerHijo,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			h3 = T.addBefore(T.root(), h4, 4);
-			assertTrue("Tama�o del �rbol con 5 elementos != 5", T.size() == 5);
+			assertTrue("Tamaño del árbol con 5 elementos != 5", T.size() == 5);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addBefore(root,UltimoHijo,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addBefore(root,UltimoHijo,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			T.addFirstChild(h3, 8);
-			assertTrue("Tama�o del �rbol con 6 elementos != 6", T.size() == 6);
+			assertTrue("Tamaño del árbol con 6 elementos != 6", T.size() == 6);
 			T.addFirstChild(h3, 7);
-			assertTrue("Tama�o del �rbol con 7 elementos != 7", T.size() == 7);
+			assertTrue("Tamaño del árbol con 7 elementos != 7", T.size() == 7);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(h3,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(h3,e) lanza la excepción InvalidPositionException");
 		}
 		// Eliminando
 		try {
 			T.removeInternalNode(h3);
-			assertTrue("Tama�o del �rbol con 6 elementos != 6", T.size() == 6);
+			assertTrue("Tamaño del árbol con 6 elementos != 6", T.size() == 6);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar removeInternalNode con una posici�n v�lida lanza la excepci�n InvalidPositionException (testing size())");
+			fail("Al invocar removeInternalNode con una posición válida lanza la excepción InvalidPositionException (testing size())");
 		}
 		try {
 			T.removeExternalNode(h2);
-			assertTrue("Tama�o del �rbol con 5 elementos != 5", T.size() == 5);
+			assertTrue("Tamaño del árbol con 5 elementos != 5", T.size() == 5);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar removeExternalNode con una posici�n v�lida lanza la excepci�n InvalidPositionException (testing size())");
+			fail("Al invocar removeExternalNode con una posición válida lanza la excepción InvalidPositionException (testing size())");
 		}
 		try {
 			T.removeNode(h4);
-			assertTrue("Tama�o del �rbol con 4 elementos != 4", T.size() == 4);
+			assertTrue("Tamaño del árbol con 4 elementos != 4", T.size() == 4);
 		} catch (InvalidPositionException e) {
-			fail("Al invocar removeNode con una posici�n v�lida lanza la excepci�n InvalidPositionException (testing size())");
+			fail("Al invocar removeNode con una posición válida lanza la excepción InvalidPositionException (testing size())");
 		}
 
 	}
@@ -108,74 +108,74 @@ public class TreeTest {
 	public void isEmpty() {
 		Position<Integer> h1, h2, h3, h4;
 		h1 = h2 = h3 = h4 = null;
-		// Caso_de_prueba: Arbol Vac�o.
-		assertTrue("El �rbol justo despu�s de ser creado no est� vac�o",
+		// Caso_de_prueba: Arbol Vacío.
+		assertTrue("El árbol justo después de ser creado no está vacío",
 				T.isEmpty());
-		// Caso_de_prueba: Solo ra�z.
+		// Caso_de_prueba: Solo raíz.
 		try {
 			T.createRoot(1);
-			assertFalse("El �rbol con 1 elemento est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 1 elemento está vacío", T.isEmpty());
 		} catch (InvalidOperationException e) {
-			fail("Al crear la ra�z de un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al crear la raíz de un árbol vacío lanza la excepción InvalidOperationException");
 		}
 		try {
 			h1 = T.addFirstChild(T.root(), 2);
-			assertFalse("El �rbol con 2 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 2 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(root,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(root,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			h4 = T.addLastChild(T.root(), 5);
-			assertFalse("El �rbol con 3 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 3 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addLastChild(root,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addLastChild(root,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			h2 = T.addAfter(T.root(), h1, 3);
-			assertFalse("El �rbol con 4 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 4 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addAfter(root,primerHijo,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addAfter(root,primerHijo,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			h3 = T.addBefore(T.root(), h4, 4);
-			assertFalse("El �rbol con 5 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 5 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addBefore(root,UltimoHijo,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addBefore(root,UltimoHijo,e) lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		}
 		try {
 			T.addFirstChild(h3, 8);
-			assertFalse("El �rbol con 6 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 6 elementos está vacío", T.isEmpty());
 			T.addFirstChild(h3, 7);
-			assertFalse("El �rbol con 7 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 7 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(h3,e) lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(h3,e) lanza la excepción InvalidPositionException");
 		}
 		// Eliminando
 		try {
 			T.removeInternalNode(h3);
-			assertFalse("El �rbol con 6 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 6 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar removeInternalNode con una posici�n v�lida lanza la excepci�n InvalidPositionException (testing size())");
+			fail("Al invocar removeInternalNode con una posición válida lanza la excepción InvalidPositionException (testing size())");
 		}
 		try {
 			T.removeExternalNode(h2);
-			assertFalse("El �rbol con 5 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 5 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar removeExternalNode con una posici�n v�lida lanza la excepci�n InvalidPositionException (testing size())");
+			fail("Al invocar removeExternalNode con una posición válida lanza la excepción InvalidPositionException (testing size())");
 		}
 		try {
 			T.removeNode(h4);
-			assertFalse("El �rbol con 4 elementos est� vac�o", T.isEmpty());
+			assertFalse("El árbol con 4 elementos está vacío", T.isEmpty());
 		} catch (InvalidPositionException e) {
-			fail("Al invocar removeNode con una posici�n v�lida lanza la excepci�n InvalidPositionException (testing size())");
+			fail("Al invocar removeNode con una posición válida lanza la excepción InvalidPositionException (testing size())");
 		}
 
 	}
@@ -184,19 +184,19 @@ public class TreeTest {
 	public void iterator() {
 		Iterator<Integer> it;
 		int i = 1;
-		// Caso_De_Prueba: Arbol vac�o.
+		// Caso_De_Prueba: Arbol vacío.
 		it = T.iterator();
-		assertTrue("El iterador debe estar vac�o", it.hasNext() == false);
+		assertTrue("El iterador debe estar vacío", it.hasNext() == false);
 		// Caso_De_Prueba: Arbol con un solo elemento.
 		try {
 			T.createRoot(1);
 			it = T.iterator();
 		} catch (InvalidOperationException e) {
-			fail("Al invocar createRoot() con un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al invocar createRoot() con un árbol vacío lanza la excepción InvalidOperationException");
 		}
-		assertTrue("El iterador no debe estar vac�o", it.hasNext() == true);
+		assertTrue("El iterador no debe estar vacío", it.hasNext() == true);
 		assertTrue("El iterador no funciona correctamente", it.next().equals(1));
-		assertTrue("El iterador debe estar vac�o", it.hasNext() == false);
+		assertTrue("El iterador debe estar vacío", it.hasNext() == false);
 
 		// Caso_De_Prueba: Arbol con mas de un elemento
 		T = getTree();
@@ -214,20 +214,20 @@ public class TreeTest {
 	public void positions() {
 		Iterator<Position<Integer>> it;
 		int i = 1;
-		// Caso_De_Prueba: Arbol vac�o.
+		// Caso_De_Prueba: Arbol vacío.
 		it = T.positions().iterator();
-		assertTrue("El iterador debe estar vac�o", it.hasNext() == false);
+		assertTrue("El iterador debe estar vacío", it.hasNext() == false);
 		// Caso_De_Prueba: Arbol con un solo elemento.
 		try {
 			T.createRoot(1);
 			it = T.positions().iterator();
 		} catch (InvalidOperationException e) {
-			fail("Al invocar createRoot() con un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al invocar createRoot() con un árbol vacío lanza la excepción InvalidOperationException");
 		}
-		assertTrue("El iterador no debe estar vac�o", it.hasNext() == true);
+		assertTrue("El iterador no debe estar vacío", it.hasNext() == true);
 		assertTrue("El iterador no funciona correctamente", it.next().element()
 				.equals(1));
-		assertTrue("El iterador debe estar vac�o", it.hasNext() == false);
+		assertTrue("El iterador debe estar vacío", it.hasNext() == false);
 
 		// Caso_De_Prueba: Arbol con mas de un elemento
 		T = getTree();
@@ -246,10 +246,10 @@ public class TreeTest {
 		Position<Integer> h1;
 		Iterator<Position<Integer>> hijos;
 		h1 = null;
-		// Posici�n Inv�lida
+		// Posición Inválida
 		try {
 			T.replace(null, 0);
-			fail("Replace() deber�a lanzar la excepci�n InvalidPositionException con una posici�n Inv�lida");
+			fail("Replace() debería lanzar la excepción InvalidPositionException con una posición Inválida");
 		} catch (InvalidPositionException e) {
 		}
 		// Arbol con 1 solo elemento
@@ -257,14 +257,14 @@ public class TreeTest {
 			T.createRoot(1);
 			T.replace(T.root(), 2);
 			assertTrue(
-					"Replace no funciona correctamente para un �rbol con un solo elemento.",
+					"Replace no funciona correctamente para un árbol con un solo elemento.",
 					T.root().element().equals(2));
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvalidOperationException con un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvalidOperationException con un árbol vacío");
 		} catch (InvalidPositionException e2) {
-			fail("replace() no deber�a lanzar InvalidPositionException con una posici�n v�lida.");
+			fail("replace() no debería lanzar InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException con un �rbol con elementos");
+			fail("root() no debería lanzar EmptyTreeException con un árbol con elementos");
 		}
 		// Arbol con varios elementos
 		T = getTree();
@@ -285,9 +285,9 @@ public class TreeTest {
 			assertTrue("Replace no funciona correctamente", h1.element()
 					.equals(10));
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		} catch (InvalidPositionException e2) {
-			fail("replace() no deber�a lanzar InvalidPositionException con una posici�n v�lida.");
+			fail("replace() no debería lanzar InvalidPositionException con una posición válida.");
 		}
 
 	}
@@ -297,70 +297,70 @@ public class TreeTest {
 		// Arbol Vacio
 		try {
 			T.root();
-			fail("root() deber�a haber lanzado la excepci�n EmptyTreeException con un �rbol vac�o");
+			fail("root() debería haber lanzado la excepción EmptyTreeException con un árbol vacío");
 		} catch (EmptyTreeException e) {
 		}
 		// Arbol 1 elemento
 		try {
 			T.createRoot(1);
 			assertTrue(
-					"root() no funciona correctamente para un �rbol con un solo elemento.",
+					"root() no funciona correctamente para un árbol con un solo elemento.",
 					T.root().element().equals(1));
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvalidOperationException con un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvalidOperationException con un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException con un �rbol con elementos");
+			fail("root() no debería lanzar EmptyTreeException con un árbol con elementos");
 		}
 		// Arbol con mas de 1 elemento
 		T = getTree();
 		cargarArbol(T);
 		try {
 			assertTrue(
-					"root() no funciona correctamente para un �rbol con muchos solo elementos.",
+					"root() no funciona correctamente para un árbol con muchos solo elementos.",
 					T.root().element().equals(1));
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException con un �rbol con elementos");
+			fail("root() no debería lanzar EmptyTreeException con un árbol con elementos");
 		}
 	}
 
 	@Test
 	public void parent() {
-		// Posici�n Inv�lida
+		// Posición Inválida
 		try {
 			T.parent(null);
-			fail("parent() deber�a lanzar la excepci�n InvalidPositionException al invocarse con una posici�n inv�lida");
+			fail("parent() debería lanzar la excepción InvalidPositionException al invocarse con una posición inválida");
 		} catch (InvalidPositionException e) {
 		} catch (BoundaryViolationException e) {
-			fail("parent() no deber�a lanzar la excepci�n BoundaryViolationException con una posici�n distinta a la de la ra�z");
+			fail("parent() no debería lanzar la excepción BoundaryViolationException con una posición distinta a la de la raíz");
 		}
-		// Ra�z
+		// Raíz
 		T = getTree();
 		cargarArbol(T);
 
 		try {
 			T.parent(T.root());
-			fail("parent() deber�a lanzar la excepci�n BoundaryViolationException al invocarse con la posici�n de la ra�z");
+			fail("parent() debería lanzar la excepción BoundaryViolationException al invocarse con la posición de la raíz");
 		} catch (InvalidPositionException e1) {
-			fail("parent() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida");
+			fail("parent() no debería lanzar la excepción InvalidPositionException con una posición válida");
 		} catch (BoundaryViolationException e2) {
 		} catch (EmptyTreeException e3) {
-			fail("root() no deber�a lanzar EmptyTreeException con un �rbol con elementos");
+			fail("root() no debería lanzar EmptyTreeException con un árbol con elementos");
 		}
 
 		try {
 			chequearPadre(T.root());
 		} catch (EmptyTreeException e3) {
-			fail("root() no deber�a lanzar EmptyTreeException con un �rbol con elementos");
+			fail("root() no debería lanzar EmptyTreeException con un árbol con elementos");
 		}
 	}
 
 	@Test
 	public void children() {
 		Iterator<Position<Integer>> hijos;
-		// Posici�n Inv�lida
+		// Posición Inválida
 		try {
 			T.children(null);
-			fail("children() deber�a lanzar la excepci�n InvalidPositionException con una posici�n Inv�lida");
+			fail("children() debería lanzar la excepción InvalidPositionException con una posición Inválida");
 		} catch (InvalidPositionException e) {
 		}
 		// Arbol con 1 solo elemento
@@ -368,14 +368,14 @@ public class TreeTest {
 			T.createRoot(1);
 			hijos = T.children(T.root()).iterator();
 			assertTrue(
-					"children() no funciona correctamente para un �rbol con un solo elemento, la lista de hijos de la ra�z no es vac�a.",
+					"children() no funciona correctamente para un árbol con un solo elemento, la lista de hijos de la raíz no es vacía.",
 					!hijos.hasNext());
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvalidOperationException con un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvalidOperationException con un árbol vacío");
 		} catch (InvalidPositionException e2) {
-			fail("children() no deber�a lanzar InvalidPositionException con una posici�n v�lida.");
+			fail("children() no debería lanzar InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException con un �rbol con elementos");
+			fail("root() no debería lanzar EmptyTreeException con un árbol con elementos");
 		}
 		// Arbol con varios elementos
 		T = getTree();
@@ -388,7 +388,7 @@ public class TreeTest {
 		try {
 			p = T.root();
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException con un �rbol con elementos.");
+			fail("root() no debería lanzar la excepción EmptyTreeException con un árbol con elementos.");
 			p = null;
 		}
 		if (p != null) {
@@ -398,7 +398,7 @@ public class TreeTest {
 				try {
 					p = cola.dequeue();
 				} catch (EmptyQueueException e) {
-					fail("dequeue() no deber�a lanzar EmptyQueueException para una cola con elementos.");
+					fail("dequeue() no debería lanzar EmptyQueueException para una cola con elementos.");
 				}
 				if (p == null) {
 					if (!cola.isEmpty())
@@ -411,17 +411,17 @@ public class TreeTest {
 						hijos = T.children(p).iterator();
 						if (T.isExternal(p))
 							assertFalse(
-									"children no funciona correctamente para listas de hijos vac�as.",
+									"children no funciona correctamente para listas de hijos vacías.",
 									hijos.hasNext());
 						else {
 							assertTrue(
-									"children no funciona correctamente para listas de hijos vac�as.",
+									"children no funciona correctamente para listas de hijos vacías.",
 									hijos.hasNext());
 							while (hijos.hasNext())
 								cola.enqueue(hijos.next());
 						}
 					} catch (InvalidPositionException e) {
-						fail("children() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida");
+						fail("children() no debería lanzar la excepción InvalidPositionException para una posición válida");
 					}
 				}
 
@@ -437,22 +437,22 @@ public class TreeTest {
 		Position<Integer> p;
 		Iterator<Position<Integer>> hijos = null;
 		Queue<Position<Integer>> cola = new ArrayQueue<Position<Integer>>();
-		// Posici�n inv�lida
+		// Posición inválida
 		try {
 			T.isExternal(null);
-			fail("isExternal deber�a lanzar la excepci�n InvalidPositionException con una posici�n inv�lida");
+			fail("isExternal debería lanzar la excepción InvalidPositionException con una posición inválida");
 		} catch (InvalidPositionException e) {
 		}
 		try {
 			T.isInternal(null);
-			fail("isInternal deber�a lanzar la excepci�n InvalidPositionException con una posici�n inv�lida");
+			fail("isInternal debería lanzar la excepción InvalidPositionException con una posición inválida");
 		} catch (InvalidPositionException e) {
 		}
 
 		try {
 			p = T.root();
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException con un �rbol con elementos.");
+			fail("root() no debería lanzar la excepción EmptyTreeException con un árbol con elementos.");
 			p = null;
 		}
 		if (p != null) {
@@ -462,7 +462,7 @@ public class TreeTest {
 				try {
 					p = cola.dequeue();
 				} catch (EmptyQueueException e) {
-					fail("dequeue() no deber�a lanzar EmptyQueueException para una cola con elementos.");
+					fail("dequeue() no debería lanzar EmptyQueueException para una cola con elementos.");
 				}
 				if (p == null) {
 					if (!cola.isEmpty())
@@ -486,7 +486,7 @@ public class TreeTest {
 								cola.enqueue(hijos.next());
 						}
 					} catch (InvalidPositionException e) {
-						fail("isInternal() o isExternal() no deber�an lanzar la excepci�n InvalidPositionException para una posici�n v�lida");
+						fail("isInternal() o isExternal() no deberían lanzar la excepción InvalidPositionException para una posición válida");
 					}
 				}
 
@@ -502,7 +502,7 @@ public class TreeTest {
 		Queue<Position<Integer>> cola = new ArrayQueue<Position<Integer>>();
 		try {
 			T.isRoot(null);
-			fail("isRoot deber�a lanzar la excepci�n InvalidPositionException con una posici�n inv�lida");
+			fail("isRoot debería lanzar la excepción InvalidPositionException con una posición inválida");
 		} catch (InvalidPositionException e) {
 		}
 
@@ -510,10 +510,10 @@ public class TreeTest {
 			p = T.root();
 			assertTrue("isroot() no funciona correctamente", T.isRoot(p));
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException con un �rbol con elementos.");
+			fail("root() no debería lanzar la excepción EmptyTreeException con un árbol con elementos.");
 			p = null;
 		} catch (InvalidPositionException e1) {
-			fail("root() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("root() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		}
 		if (p != null) {
 			cola.enqueue(p);
@@ -522,7 +522,7 @@ public class TreeTest {
 				try {
 					p = cola.dequeue();
 				} catch (EmptyQueueException e) {
-					fail("dequeue() no deber�a lanzar EmptyQueueException para una cola con elementos.");
+					fail("dequeue() no debería lanzar EmptyQueueException para una cola con elementos.");
 				}
 				if (p == null) {
 					if (!cola.isEmpty())
@@ -538,7 +538,7 @@ public class TreeTest {
 							cola.enqueue(p);
 						}
 					} catch (InvalidPositionException e) {
-						fail("isInternal() o isExternal no deber�an lanzar la excepci�n InvalidPositionException para una posici�n v�lida");
+						fail("isInternal() o isExternal no deberían lanzar la excepción InvalidPositionException para una posición válida");
 					}
 				}
 
@@ -557,16 +557,16 @@ public class TreeTest {
 					T.children(T.root()).iterator().hasNext());
 
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
-			fail("children() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida.");
+			fail("children() no debería lanzar la excepción InvalidPositionException para una posición válida.");
 		}
-		// Crear raiz de un �rbol no vac�o
+		// Crear raiz de un árbol no vacío
 		try {
 			T.createRoot(2);
-			fail("createRoot() deber�a haber lanzado la excepci�n InvalidOperationException sobre un �rbol no vac�o.");
+			fail("createRoot() debería haber lanzado la excepción InvalidOperationException sobre un árbol no vacío.");
 		} catch (InvalidOperationException e) {
 		}
 
@@ -583,11 +583,11 @@ public class TreeTest {
 			p = T.root();
 			T = getTree();
 			T.addFirstChild(p, 2);
-			fail("addFirstChild() deber�a lanzar la excepci�n InvalidPositionException cuando el �rbol est� vac�o");
+			fail("addFirstChild() debería lanzar la excepción InvalidPositionException cuando el árbol está vacío");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
 		}
 		try {
@@ -601,11 +601,11 @@ public class TreeTest {
 			}
 			chequearPadre(T.root());
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		}
 
 		try {
@@ -620,9 +620,9 @@ public class TreeTest {
 			assertTrue("addFirstChild() no funciona correctamente", i == 1);
 
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		}
 		// Agrego hijos al hijo extremo izquierdo de la raiz.
 		try {
@@ -634,9 +634,9 @@ public class TreeTest {
 			}
 			chequearPadre(T.root());
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		}
 
 		try {
@@ -650,7 +650,7 @@ public class TreeTest {
 			}
 			assertTrue("addFirstChild() no funciona correctamente", i == 9);
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		}
 
 	}
@@ -666,11 +666,11 @@ public class TreeTest {
 			p = T.root();
 			T = getTree();
 			T.addLastChild(p, 2);
-			fail("addLastChild() deber�a lanzar la excepci�n InvalidPositionException cuando el �rbol est� vac�o");
+			fail("addLastChild() debería lanzar la excepción InvalidPositionException cuando el árbol está vacío");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
 		}
 		try {
@@ -683,11 +683,11 @@ public class TreeTest {
 			}
 			chequearPadre(T.root());
 		} catch (InvalidPositionException e) {
-			fail("addLastChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addLastChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		}
 		try {
 			hijos = T.children(T.root()).iterator();
@@ -700,9 +700,9 @@ public class TreeTest {
 			}
 			assertTrue("addLastChild() no funciona correctamente", i == 10);
 		} catch (InvalidPositionException e) {
-			fail("addLastChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addLastChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		}
 		// Agrego hijos al hijo extremo izquierdo de la raiz.
 		try {
@@ -714,9 +714,9 @@ public class TreeTest {
 			}
 			chequearPadre(T.root());
 		} catch (InvalidPositionException e) {
-			fail("addLastChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addLastChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		}
 
 		try {
@@ -731,7 +731,7 @@ public class TreeTest {
 			assertTrue("addFirstChild() no funciona correctamente", i == 20);
 
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		}
 
 	}
@@ -745,12 +745,12 @@ public class TreeTest {
 		try {
 			T.createRoot(1);
 			T.addBefore(null, T.root(), 2);
-			fail("addBefore() deber�a lanzar la excepci�n InvalidPositionException con una posici�n inv�lida.");
+			fail("addBefore() debería lanzar la excepción InvalidPositionException con una posición inválida.");
 
 		} catch (InvalidOperationException e1) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		} catch (InvalidPositionException e1) {
 
 		}
@@ -761,14 +761,14 @@ public class TreeTest {
 			hijo = T.addFirstChild(padre, 5);
 			T = getTree();
 			T.addBefore(padre, hijo, 6);
-			fail("addBefore() deber�a lanzar la excepcion InvalidPositionException cuando el �rbol esta vac�o");
+			fail("addBefore() debería lanzar la excepcion InvalidPositionException cuando el árbol esta vacío");
 		} catch (InvalidPositionException e1) {
 
 		} catch (InvalidOperationException e) {
 
-			fail("addFirstChild() no deber�a lanzar una excepci�n InvalidOperationException para un �rbol vac�o");
+			fail("addFirstChild() no debería lanzar una excepción InvalidOperationException para un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar una excepcion EmptyTreeException en un arbol no vac�o");
+			fail("root() no debería lanzar una excepcion EmptyTreeException en un arbol no vacío");
 		}
 		try {
 
@@ -779,15 +779,15 @@ public class TreeTest {
 			T.createRoot(1);
 			h1 = T.addFirstChild(T.root(), 2);
 		} catch (InvalidPositionException e1) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException para una posición válida.");
 		} catch (InvalidOperationException e1) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		}
 		try {
 			T.addBefore(padre, h1, 4);
-			fail("addBefore() deber�a lanzar la excepcion InvalidPositionException cuando el nodo primer argumento no es el padre del nodo segundo argumento");
+			fail("addBefore() debería lanzar la excepcion InvalidPositionException cuando el nodo primer argumento no es el padre del nodo segundo argumento");
 		} catch (InvalidPositionException e1) {
 		}
 
@@ -842,14 +842,14 @@ public class TreeTest {
 				hjsH1.remove(hjsH1.first());
 				hijosH1.remove(hijosH1.first());
 			}
-		} catch (TDALista.InvalidPositionException | InvalidPositionException e1) {
-			fail("addBefore(),children(), addFirstChild(), remove() no deber�a lanzar InvalidPositionException con una posici�n v�lida");
+		} catch (InvalidPositionException e1) {
+			fail("addBefore(),children(), addFirstChild(), remove() no debería lanzar InvalidPositionException con una posición válida");
 			e1.printStackTrace();
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		} catch (InvalidOperationException e1) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
-		} catch (EmptyListException e1){fail("los m�todos first() o last() no deber�a lanzar la excepci�n EmptyListException para una Lista con elementos [�PROBLEMA EN TDALISTA]");}
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
+		} catch (EmptyListException e1){fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [´PROBLEMA EN TDALISTA]");}
 
 	}
 
@@ -861,11 +861,11 @@ public class TreeTest {
 		try {
 			T.createRoot(1);
 			T.addAfter(null, T.root(), 2);
-			fail("addAfter() deber�a lanzar la excepci�n InvalidPositionException con una posici�n inv�lida.");
+			fail("addAfter() debería lanzar la excepción InvalidPositionException con una posición inválida.");
 		} catch (InvalidOperationException e1) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		} catch (InvalidPositionException e1) {
 		}
 		try {
@@ -874,18 +874,18 @@ public class TreeTest {
 			padre = T.root();
 			hijo = T.addFirstChild(padre, 5);
 		} catch (InvalidPositionException e1) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException para una posición válida");
 		} catch (InvalidOperationException e) {
 
-			fail("addFirstChild() no deber�a lanzar una excepci�n InvalidOperationException para un �rbol vac�o");
+			fail("addFirstChild() no debería lanzar una excepción InvalidOperationException para un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar una excepcion EmptyTreeException en un arbol no vac�o");
+			fail("root() no debería lanzar una excepcion EmptyTreeException en un arbol no vacío");
 		}
 
 		try {
 			T = getTree();
 			T.addAfter(padre, hijo, 6);
-			fail("addAfter() deber�a lanzar la excepcion InvalidPositionException cuando el �rbol esta vac�o");
+			fail("addAfter() debería lanzar la excepcion InvalidPositionException cuando el árbol esta vacío");
 		} catch (InvalidPositionException e1) {
 		}
 
@@ -897,16 +897,16 @@ public class TreeTest {
 			T.createRoot(1);
 			h1 = T.addFirstChild(T.root(), 2);
 		} catch (InvalidPositionException e1) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException para una posición válida");
 		} catch (InvalidOperationException e) {
 
-			fail("addFirstChild() no deber�a lanzar una excepci�n InvalidOperationException para un �rbol vac�o");
+			fail("addFirstChild() no debería lanzar una excepción InvalidOperationException para un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar una excepcion EmptyTreeException en un arbol no vac�o");
+			fail("root() no debería lanzar una excepcion EmptyTreeException en un arbol no vacío");
 		}
 		try {
 			T.addAfter(padre, h1, 4);
-			fail("addAfter() deber�a lanzar la excepcion InvalidPositionException cuando el nodo primer argumento no es el padre del nodo segundo argumento");
+			fail("addAfter() debería lanzar la excepcion InvalidPositionException cuando el nodo primer argumento no es el padre del nodo segundo argumento");
 		} catch (InvalidPositionException e1) {
 
 		}
@@ -963,13 +963,13 @@ public class TreeTest {
 				hjsH1.remove(hjsH1.first());
 				hijosH1.remove(hijosH1.first());
 			}
-		} catch (InvalidPositionException | TDALista.InvalidPositionException e1) {
-			fail("addAfter(), children(), remove() o addFirstChild() no deber�a lanzar InvalidPositionException con una posici�n v�lida");
+		} catch (InvalidPositionException e1) {
+			fail("addAfter(), children(), remove() o addFirstChild() no debería lanzar InvalidPositionException con una posición válida");
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío");
 		} catch (InvalidOperationException e1) {
-			fail("createRoot() no deber�a lanzar la excepci�n InvalidOperationException para un �rbol vac�o.");
-		} catch (EmptyListException e1){fail("los m�todos first() o last() no deber�a lanzar la excepci�n EmptyListException para una Lista con elementos [�PROBLEMA EN TDALISTA]");}
+			fail("createRoot() no debería lanzar la excepción InvalidOperationException para un árbol vacío.");
+		} catch (EmptyListException e1){fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [´PROBLEMA EN TDALISTA]");}
 
 	}
 
@@ -984,13 +984,13 @@ public class TreeTest {
 			nodo = T.root();
 			T = getTree();
 			T.removeExternalNode(nodo);
-			fail("removeExternalNode() deber�a lanzar una excepci�n InvalidPositionException cuando el �rbol esta vacio");
+			fail("removeExternalNode() debería lanzar una excepción InvalidPositionException cuando el árbol esta vacio");
 		} catch (InvalidPositionException e) {
 
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeExceptionen un �rbol no vac�o");
+			fail("root() no debería lanzar EmptyTreeExceptionen un árbol no vacío");
 		}
 		try {
 			T = getTree();
@@ -998,29 +998,29 @@ public class TreeTest {
 			T.addFirstChild(T.root(), 2);
 
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild() no deber�a lanzar la excepci�n InvalidPositionException con una posici�n v�lida.");
+			fail("addFirstChild() no debería lanzar la excepción InvalidPositionException con una posición válida.");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException en un �rbol no vac�o");
+			fail("root() no debería lanzar EmptyTreeException en un árbol no vacío");
 		}
 		try {
 			T.removeExternalNode(T.root());
-			fail("removeExternalNode() deber�a lanzar una excepci�n InvalidPositionException cuando su argumento es un nodo interno ");
+			fail("removeExternalNode() debería lanzar una excepción InvalidPositionException cuando su argumento es un nodo interno ");
 		} catch (InvalidPositionException e) {
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException en un �rbol no vac�o");
+			fail("root() no debería lanzar EmptyTreeException en un árbol no vacío");
 		}
 		try {
 			T = getTree();
 			T.createRoot(1);
 			T.removeExternalNode(T.root());
 		} catch (InvalidPositionException e) {
-			fail("removeExternalNode() no deber�a lanzar un excepci�n InvalidPositionException cuando el argumento es la raiz sin hijos");
+			fail("removeExternalNode() no debería lanzar un excepción InvalidPositionException cuando el argumento es la raiz sin hijos");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException en un �rbol no vac�o");
+			fail("root() no debería lanzar EmptyTreeException en un árbol no vacío");
 		}
 		try {
 
@@ -1043,11 +1043,11 @@ public class TreeTest {
 			assertTrue("removeExternal() no funciona correctamente",
 					hijos.hasNext() == false);
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException en un �rbol no vac�o");
+			fail("root() no debería lanzar EmptyTreeException en un árbol no vacío");
 		} catch (InvalidPositionException e) {
-			fail("addFirstChild(), removeExternalNode() o children() no deber�a lanzar InvalidPositionException al recibir como argumento la raiz");
+			fail("addFirstChild(), removeExternalNode() o children() no debería lanzar InvalidPositionException al recibir como argumento la raiz");
 		}
 	}
 
@@ -1059,59 +1059,59 @@ public class TreeTest {
 		Iterator<Position<Integer>> it;
 		boolean paso = false;
 		int i = 0;
-		// Arbol Vac�o
+		// Arbol Vacío
 		try {
 			T.createRoot(1);
 			nodo = T.root();
 			T = getTree();
 			T.removeInternalNode(nodo);
-			fail("removeInternalNode() deber�a lanzar una excepci�n InvalidPositionException cuando el �rbol esta vacio");
+			fail("removeInternalNode() debería lanzar una excepción InvalidPositionException cuando el árbol esta vacio");
 		} catch (InvalidPositionException e) {
 		} catch (InvalidOperationException e) {
-			fail("root() no deber�a lanzar InvaliOperationException en un �rbol no vac�o");
+			fail("root() no debería lanzar InvaliOperationException en un árbol no vacío");
 		} catch (EmptyTreeException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		}
 		// Raiz con hijos
 		try {
 			cargarArbol(T);
 			i = T.size();
 			T.removeInternalNode(T.root());
-			fail("removeInternalNode() deber�a lanzar una excepci�n InvalidPositionException cuando su argumento es la raiz con hijos ");
+			fail("removeInternalNode() debería lanzar una excepción InvalidPositionException cuando su argumento es la raiz con hijos ");
 
 		} catch (InvalidPositionException e) {
 			assertTrue("RemoveInternal no funciona correctamente",
 					T.size() == i);
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar InvaliOperationException en un �rbol no vac�o");
+			fail("root() no debería lanzar InvaliOperationException en un árbol no vacío");
 		}
-		//Ra�z con 1 solo hijo
+		//Raíz con 1 solo hijo
 		T = getTree();
 		cargarArbol3(T);
 		Position<Integer> raiz=null, hijo=null;
 		try{
 		raiz=T.root();
 		hijo= T.children(T.root()).iterator().next();
-		}catch (EmptyTreeException e){fail("children() deber�a lanzar una excepci�n EmptyTreeException cuando el �rbol no est� vac�o");}
-		 catch (InvalidPositionException e){fail("children() no deber�a lanzar una excepci�n InvalidPositionException para una posici�n v�lida");}
+		}catch (EmptyTreeException e){fail("children() debería lanzar una excepción EmptyTreeException cuando el árbol no está vacío");}
+		 catch (InvalidPositionException e){fail("children() no debería lanzar una excepción InvalidPositionException para una posición válida");}
 		try{
 			T.removeInternalNode(raiz);
 			raiz=T.parent(hijo);
-			fail("El m�todo parent deber�a haber lanzado la excepci�n BoundaryViolationException al intentar eliminar la ra�z del �rbol.");
-		}catch(InvalidPositionException e){fail("El m�todo removeInternalNode no deber�a lanzar esta excepci�n al intentar eliminar la ra�z de un �rbol cuando esta tiene un s�lo hijo.");
+			fail("El método parent debería haber lanzado la excepción BoundaryViolationException al intentar eliminar la raíz del árbol.");
+		}catch(InvalidPositionException e){fail("El método removeInternalNode no debería lanzar esta excepción al intentar eliminar la raíz de un árbol cuando esta tiene un sólo hijo.");
 	    }catch(BoundaryViolationException e){}
 		// Raiz sin hijos.
 		try {
 			T = getTree();
 			T.createRoot(1);
 			T.removeInternalNode(T.root());
-			fail("removeInternalNode() deber�a lanzar una excepci�n InvalidPositionException cuando su argumento es un nodo externo ");
+			fail("removeInternalNode() debería lanzar una excepción InvalidPositionException cuando su argumento es un nodo externo ");
 
 		} catch (InvalidPositionException e) {
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar InvaliOperationException en un �rbol no vac�o");
+			fail("root() no debería lanzar InvaliOperationException en un árbol no vacío");
 		}
 		// Nodo interno.
 		T = getTree();
@@ -1119,22 +1119,22 @@ public class TreeTest {
 		// Intento eliminar la raiz
 		try {
 			T.removeInternalNode(T.root());
-			fail("removeInternal deber�a lanzar la excepci�n InvalidPositionException al invocarlo con la ra�z con hijos.");
+			fail("removeInternal debería lanzar la excepción InvalidPositionException al invocarlo con la raíz con hijos.");
 		} catch (InvalidPositionException e) {
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		}
 		// Intento eliminar un nodo externo
 		try {
 			it = T.children(T.root()).iterator();
 			paso = true;
 			T.removeInternalNode(it.next());
-			fail("removeInternalNode() deber�a haber lanzado la excepci�n InvalidPositionException");
+			fail("removeInternalNode() debería haber lanzado la excepción InvalidPositionException");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
 			if (!paso)
-				fail("children() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida.");
+				fail("children() no debería lanzar la excepción InvalidPositionException para una posición válida.");
 		}
 		// Intento eliminar nodos internos.
 		lista = new DoubleLinkedList<Integer>();
@@ -1203,19 +1203,19 @@ public class TreeTest {
 			lista.addLast(12);
 			lista.addLast(11);
 			chequearHijosNiveles2(lista);
-		} catch (InvalidPositionException | TDALista.InvalidPositionException e) {
-			fail("removeInternalNode(), children(), removeExternalNode(), remove(), o set() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida.");
+		} catch (InvalidPositionException e) {
+			fail("removeInternalNode(), children(), removeExternalNode(), remove(), o set() no debería lanzar la excepción InvalidPositionException para una posición válida.");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException para un �rbol no vac�o.");
-		} catch (TDALista.BoundaryViolationException e) {
-			fail("prev() no deber�a lanzar la excepci�n BoundaryViolationException con una posici�n .");
-		} catch (EmptyListException e1){fail("los m�todos first() o last() no deber�a lanzar la excepci�n EmptyListException para una Lista con elementos [�PROBLEMA EN TDALISTA]");}
+			fail("root() no debería lanzar la excepción EmptyTreeException para un árbol no vacío.");
+		} catch (BoundaryViolationException e) {
+			fail("prev() no debería lanzar la excepción BoundaryViolationException con una posición .");
+		} catch (EmptyListException e1){fail("los métodos first() o last() no debería lanzar la excepción EmptyListException para una Lista con elementos [´PROBLEMA EN TDALISTA]");}
 
 	}
 
 	@Test
 	public void remove() {
-		// Arbol Vac�o
+		// Arbol Vacío
 		PositionList<Position<Integer>> lista;
 		Position<Integer> pos, nodo;
 		Iterator<Position<Integer>> it;
@@ -1225,24 +1225,24 @@ public class TreeTest {
 			nodo = T.root();
 			T = getTree();
 			T.removeNode(nodo);
-			fail("removeNode() deber�a lanzar una excepci�n InvalidPositionException cuando el �rbol esta vacio");
+			fail("removeNode() debería lanzar una excepción InvalidPositionException cuando el árbol esta vacio");
 		} catch (InvalidPositionException e) {
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar InvaliOperationException en un �rbol no vac�o");
+			fail("root() no debería lanzar InvaliOperationException en un árbol no vacío");
 		}
 		// Raiz con hijos
 		try {
 			cargarArbol(T);
 			i = T.size();
 			T.removeNode(T.root());
-			fail("removeNode() deber�a lanzar una excepci�n InvalidPositionException cuando su argumento es la raiz con hijos ");
+			fail("removeNode() debería lanzar una excepción InvalidPositionException cuando su argumento es la raiz con hijos ");
 
 		} catch (InvalidPositionException e) {
 			assertTrue("removeNode no funciona correctamente", T.size() == i);
 		} catch (EmptyTreeException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol no vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol no vacío");
 		}
 		// Raiz sin hijos.
 		try {
@@ -1252,11 +1252,11 @@ public class TreeTest {
 			assertTrue("removeNode no funciona correctamente", T.size() == 0);
 
 		} catch (InvalidPositionException e) {
-			fail("removeNode() no deber�a lanzar un excepci�n InvalidPositionException cuando el argumento es la raiz sin hijos");
+			fail("removeNode() no debería lanzar un excepción InvalidPositionException cuando el argumento es la raiz sin hijos");
 		} catch (InvalidOperationException e) {
-			fail("createRoot() no deber�a lanzar InvaliOperationException en un �rbol vac�o");
+			fail("createRoot() no debería lanzar InvaliOperationException en un árbol vacío");
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar InvaliOperationException en un �rbol no vac�o");
+			fail("root() no debería lanzar InvaliOperationException en un árbol no vacío");
 		}
 		// Elimino todos los nodos del nivel 1
 
@@ -1280,11 +1280,11 @@ public class TreeTest {
 			}
 			assertTrue("remove() no funciona correctamente", !it.hasNext());
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
-			fail("removeNode(), children o parent() no deber�a lanzar InvalidPositionException para una posici�n v�lida.");
+			fail("removeNode(), children o parent() no debería lanzar InvalidPositionException para una posición válida.");
 		} catch (BoundaryViolationException e) {
-			fail("parent() no deber�a lanzar BoundaryViolationException para una posici�n distinta a la ra�z.");
+			fail("parent() no debería lanzar BoundaryViolationException para una posición distinta a la raíz.");
 		}
 		// Elimino todos los nodos del nivel 1
 		try {
@@ -1304,11 +1304,11 @@ public class TreeTest {
 			}
 			assertTrue("remove() no funciona correctamente", !it.hasNext());
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
-			fail("removeNode(),children o parent() no deber�a lanzar InvalidPositionException para una posici�n v�lida.");
+			fail("removeNode(),children o parent() no debería lanzar InvalidPositionException para una posición válida.");
 		} catch (BoundaryViolationException e) {
-			fail("parent() no deber�a lanzar BoundaryViolationException para una posici�n distinta a la ra�z.");
+			fail("parent() no debería lanzar BoundaryViolationException para una posición distinta a la raíz.");
 		}
 
 		try {
@@ -1322,9 +1322,9 @@ public class TreeTest {
 			assertTrue("remove() no funciona correctamente", !it.hasNext());
 			assertTrue("remove() no funciona correctamente", T.size() == 1);
 		} catch (EmptyTreeException e) {
-			fail("root() no deber�a lanzar EmptyTreeException para un �rbol no vac�o.");
+			fail("root() no debería lanzar EmptyTreeException para un árbol no vacío.");
 		} catch (InvalidPositionException e) {
-			fail("removeNode(), children o parent() no deber�a lanzar InvalidPositionException para una posici�n v�lida.");
+			fail("removeNode(), children o parent() no debería lanzar InvalidPositionException para una posición válida.");
 		}
 
 	}
@@ -1347,11 +1347,11 @@ public class TreeTest {
 			Arbol.addFirstChild(h5, 12);
 
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posici�n v�lida lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posición válida lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		} catch (InvalidOperationException e3) {
-			fail("Al invocar createRoot() con un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al invocar createRoot() con un árbol vacío lanza la excepción InvalidOperationException");
 		}
 
 	}	
@@ -1365,11 +1365,11 @@ public class TreeTest {
 			Arbol.addFirstChild(h1, 6);
 		
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posici�n v�lida lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posición válida lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		} catch (InvalidOperationException e3) {
-			fail("Al invocar createRoot() con un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al invocar createRoot() con un árbol vacío lanza la excepción InvalidOperationException");
 		}
 
 	}
@@ -1392,11 +1392,11 @@ public class TreeTest {
 			Arbol.addFirstChild(h5, 12);
 
 		} catch (InvalidPositionException e) {
-			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posici�n v�lida lanza la excepci�n InvalidPositionException");
+			fail("Al invocar addFirstChild(), addLastChild() o addAfter() con una posición válida lanza la excepción InvalidPositionException");
 		} catch (EmptyTreeException e2) {
-			fail("Al solicitar la ra�z de un �rbol no vac�o lanza la excepci�n EmptyTreeException");
+			fail("Al solicitar la raíz de un árbol no vacío lanza la excepción EmptyTreeException");
 		} catch (InvalidOperationException e3) {
-			fail("Al invocar createRoot() con un �rbol vac�o lanza la excepci�n InvalidOperationException");
+			fail("Al invocar createRoot() con un árbol vacío lanza la excepción InvalidOperationException");
 		}
 
 	}
@@ -1408,7 +1408,7 @@ public class TreeTest {
 		try {
 			hijos = T.children(v).iterator();
 		} catch (InvalidPositionException e) {
-			fail("childen() no deber�a lanzar InvalidPositionException con una posici�n v�lida.");
+			fail("childen() no debería lanzar InvalidPositionException con una posición válida.");
 		}
 
 		while (hijos.hasNext()) {
@@ -1426,7 +1426,7 @@ public class TreeTest {
 		try {
 			hijos = T.children(v).iterator();
 		} catch (InvalidPositionException e) {
-			fail("childen() no deber�a lanzar InvalidPositionException con una posici�n v�lida.");
+			fail("childen() no debería lanzar InvalidPositionException con una posición válida.");
 		}
 
 		while (hijos.hasNext()) {
@@ -1435,9 +1435,9 @@ public class TreeTest {
 				assertTrue("parent() no funciona correctamente",
 						T.parent(p) == v);
 			} catch (InvalidPositionException e) {
-				fail("parent() no deber�a lanzar InvalidPositionException con una posici�n v�lida.");
+				fail("parent() no debería lanzar InvalidPositionException con una posición válida.");
 			} catch (BoundaryViolationException e) {
-				fail("parent() no deber�a lanzar BoundaryViolationException con una posici�n distinta a la de la ra�z.");
+				fail("parent() no debería lanzar BoundaryViolationException con una posición distinta a la de la raíz.");
 			}
 			chequearPadre(p);
 		}
@@ -1453,7 +1453,7 @@ public class TreeTest {
 			p = T.root();
 
 		} catch (EmptyTreeException e1) {
-			fail("root() no deber�a lanzar la excepci�n EmptyTreeException con un �rbol con elementos.");
+			fail("root() no debería lanzar la excepción EmptyTreeException con un árbol con elementos.");
 			p = null;
 		}
 		if (p != null) {
@@ -1463,7 +1463,7 @@ public class TreeTest {
 				try {
 					p = cola.dequeue();
 				} catch (EmptyQueueException e) {
-					fail("dequeue() no deber�a lanzar EmptyQueueException para una cola con elementos.");
+					fail("dequeue() no debería lanzar EmptyQueueException para una cola con elementos.");
 				}
 				if (p == null) {
 					if (!cola.isEmpty())
@@ -1475,7 +1475,7 @@ public class TreeTest {
 					try {
 						hijos = T.children(p).iterator();
 					} catch (InvalidPositionException e) {
-						fail("children() no deber�a lanzar la excepci�n InvalidPositionException para una posici�n v�lida");
+						fail("children() no debería lanzar la excepción InvalidPositionException para una posición válida");
 					}
 					while (hijos.hasNext()) {
 						cola.enqueue(hijos.next());
